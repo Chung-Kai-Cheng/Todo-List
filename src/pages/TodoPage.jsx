@@ -51,6 +51,10 @@ const TodoPage = () => {
     setInputValue('');
   };
 
+  const handleKeyDown = () => {
+    handleTodo?.();
+  };
+
   return (
     <div>
       TodoPage
@@ -59,6 +63,7 @@ const TodoPage = () => {
         inputValue={inputValue}
         onChange={handleInput}
         onAddTodo={handleTodo}
+        onKeyDown={handleKeyDown}
       />
       <TodoCollection todos={todos} />
       <Footer />
