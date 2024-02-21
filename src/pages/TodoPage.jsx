@@ -28,6 +28,8 @@ const TodoPage = () => {
   const [inputValue, setInputValue] = useState('');
   const [todos, setTodos] = useState(dummyTodos);
 
+  const numberOfItems = todos.length;
+
   const handleChange = (value) => {
     setInputValue(value);
   };
@@ -125,7 +127,7 @@ const TodoPage = () => {
         onSave={handleSave}
         onDelete={handleDelete}
       />
-      <Footer />
+      <Footer numberOfItems={numberOfItems} />
     </div>
   );
 };
