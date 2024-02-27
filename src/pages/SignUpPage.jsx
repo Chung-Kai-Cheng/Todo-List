@@ -7,7 +7,7 @@ import {
 import { ACLogoIcon } from 'assets/images';
 import { AuthInput } from 'components';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { register } from 'api/auth';
 import Swal from 'sweetalert2';
 
@@ -15,6 +15,7 @@ const SignUpPage = () => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
   const handleClick = async () => {
     //排除輸入值長度為 0 的狀況
@@ -38,6 +39,7 @@ const SignUpPage = () => {
         icon: 'success',
         showConfirmButton: false,
       });
+      navigate('/todo');
       return;
     }
     // 註冊失敗訊息
