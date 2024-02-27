@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Footer, Header, TodoCollection, TodoInput } from 'components';
-import { getTodos } from 'api/todos';
+import { createTodo, getTodos } from 'api/todos';
 
 const TodoPage = () => {
   const [inputValue, setInputValue] = useState('');
@@ -12,23 +12,31 @@ const TodoPage = () => {
     setInputValue(value);
   };
 
-  const handleAddTodo = () => {
+  const handleAddTodo = async () => {
     if (inputValue.length === 0) {
       return;
     }
 
-    setTodos((prevTodos) => {
-      return [
-        ...prevTodos,
-        {
-          id: Math.random() * 100,
-          title: inputValue,
-          isDone: false,
-        },
-      ];
-    });
-
-    setInputValue('');
+    try {
+      const data = await createTodo({
+        title: inputValue,
+        isDone: false,
+      });
+      setTodos((prevTodos) => {
+        return [
+          ...prevTodos,
+          {
+            id: data.id,
+            title: data.title,
+            isDone: data.isDone,
+            isEdit: false,
+          },
+        ];
+      });
+      setInputValue('');
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const handleKeyDown = () => {
