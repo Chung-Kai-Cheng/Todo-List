@@ -6,9 +6,9 @@ import {
 } from 'components/common/auth.styled';
 import { ACLogoIcon } from 'assets/images';
 import { AuthInput } from 'components';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { register } from 'api/auth';
+import { checkPermission, register } from 'api/auth';
 import Swal from 'sweetalert2';
 
 const SignUpPage = () => {
@@ -51,6 +51,27 @@ const SignUpPage = () => {
       showConfirmButton: false,
     });
   };
+
+  useEffect(() => {
+    const checkTokenIsValid = async () => {
+      const authToken = localStorage.getItem('authToken');
+
+      //驗證不存在則不執行
+      if (!authToken) {
+        return;
+      }
+
+      const result = await checkPermission(authToken);
+      //正確才導向
+      if (result) {
+        navigate('/todo');
+      }
+    };
+
+    checkTokenIsValid();
+    //navigate發生變化時，useEffect才重新執行
+  }, [navigate]);
+
   return (
     <AuthContainer>
       <div>
