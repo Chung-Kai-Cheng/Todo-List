@@ -1,5 +1,5 @@
 import { checkPermission, login, register } from 'api/auth';
-import { createContext, useEffect, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 import * as jwt from 'jsonwebtoken';
 import { useLocation } from 'react-router-dom';
 
@@ -12,6 +12,7 @@ const defaultAuthContext = {
 };
 const AuthContext = createContext(defaultAuthContext);
 
+export const useAuth = () => useContext(AuthContext);
 export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [payload, setPayload] = useState(null);
