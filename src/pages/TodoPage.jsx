@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Footer, Header, TodoCollection, TodoInput } from 'components';
 import { createTodo, deleteTodo, getTodos, patchTodo } from 'api/todos';
-import { checkPermission } from 'api/auth';
 import { useNavigate } from 'react-router';
 import { useAuth } from 'contexts/AuthContext';
 

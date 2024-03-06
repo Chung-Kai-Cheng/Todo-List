@@ -8,7 +8,6 @@ import { ACLogoIcon } from 'assets/images';
 import { AuthInput } from 'components';
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { checkPermission, login } from 'api/auth';
 import Swal from 'sweetalert2';
 import { useAuth } from 'contexts/AuthContext';
 
