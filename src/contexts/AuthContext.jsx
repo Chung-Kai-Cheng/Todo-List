@@ -12,6 +12,7 @@ const defaultAuthContext = {
 };
 const AuthContext = createContext(defaultAuthContext);
 
+//封裝成hooks
 export const useAuth = () => useContext(AuthContext);
 export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -46,8 +47,8 @@ export const AuthProvider = ({ children }) => {
       value={{
         isAuthenticated,
         currentMember: payload && {
-          id: payload.sub,
-          name: payload.name,
+          id: payload.sub, // 取出 sub 字串，可以做為使用者 id
+          name: payload.name, // 取出使用者帳號
         },
         register: async (data) => {
           //取值
