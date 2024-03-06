@@ -9,7 +9,7 @@ const TodoPage = () => {
   const [todos, setTodos] = useState([]);
   const navigate = useNavigate();
   //掛載useAuth
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, currentMember } = useAuth();
 
   const numberOfItems = todos.length;
 
@@ -143,7 +143,8 @@ const TodoPage = () => {
   return (
     <div>
       TodoPage
-      <Header />
+      {/* 若currentMember存在，則帶入name */}
+      <Header username={currentMember?.name} />
       <TodoInput
         inputValue={inputValue}
         onChange={handleChange}
